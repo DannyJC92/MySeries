@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class DetailsActivity extends AppCompatActivity {
 
     private DataSource datasource;
@@ -39,11 +41,17 @@ public class DetailsActivity extends AppCompatActivity {
         newTotEps.setText(Integer.toString(series.getTotalSeries()));
 
         Button updateButton = (Button) findViewById(R.id.update_button);
-        updateButton.setOnClickListener(new View.OnClickListener(){
+        updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                if(!TextUtils.isEmpty(newName.getText())) {
+            public void onClick(View v) {
+                if (!TextUtils.isEmpty(newName.getText())
+                        && !TextUtils.isEmpty(newCurEps.getText())
+                        && !TextUtils.isEmpty(newTotEps.getText())) {
+
                     series.setSeries(newName.getText().toString());
+                    series.setCurrentSeries(Integer.parseInt(newCurEps.getText().toString()));
+                    series.setTotalSeries(Integer.parseInt(newTotEps.getText().toString()));
+
                     datasource.updateSeries(series);
                     Toast.makeText(DetailsActivity.this, "Series updated", Toast.LENGTH_SHORT).show();
 
@@ -51,7 +59,7 @@ public class DetailsActivity extends AppCompatActivity {
                     setResult(Activity.RESULT_OK, resultIntent);
                     finish();
                 } else {
-                    Toast.makeText(DetailsActivity.this, "Please enter some text in the title field", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailsActivity.this, "Please enter some text in the fields", Toast.LENGTH_LONG).show();
                 }
             }
         });
