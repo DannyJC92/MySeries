@@ -19,9 +19,9 @@ public class DataSource {
     private String[] seriesAllColumns =
             {
                     MySQLiteHelper.COLUMN_SERIES_ID,
-                    MySQLiteHelper.COLUMN_SERIES_NAME//,
-                    //MySQLiteHelper.COLUMN_SERIES_CURRENT_EPS,
-                    //MySQLiteHelper.COLUMN_SERIES_TOTAL_EPS
+                    MySQLiteHelper.COLUMN_SERIES_NAME,
+                    MySQLiteHelper.COLUMN_SERIES_CURRENT_EPS,
+                    MySQLiteHelper.COLUMN_SERIES_TOTAL_EPS
             };
 
     public DataSource(Context context) {
@@ -40,7 +40,7 @@ public class DataSource {
         dbHelper.close();
     }
 
-    public long createSeries(String series) {
+    public long createSeries(String series, int curEps, int totEps) {
         // If the database is not yet open, open it
         if (!database.isOpen()) {
             open();
@@ -48,8 +48,8 @@ public class DataSource {
 
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_SERIES_NAME, series);
-        //values.put(MySQLiteHelper.COLUMN_SERIES_CURRENT_EPS, curEps);
-        //values.put(MySQLiteHelper.COLUMN_SERIES_TOTAL_EPS, totEps);
+        values.put(MySQLiteHelper.COLUMN_SERIES_CURRENT_EPS, curEps);
+        values.put(MySQLiteHelper.COLUMN_SERIES_TOTAL_EPS, totEps);
         long insertId = database.insert(MySQLiteHelper.TABLE_SERIES, null, values);
 
         if (database.isOpen())
@@ -78,8 +78,8 @@ public class DataSource {
 
         ContentValues args = new ContentValues();
         args.put(MySQLiteHelper.COLUMN_SERIES_NAME, series.getSeries());
-        //args.put(MySQLiteHelper.COLUMN_SERIES_CURRENT_EPS, series.getCurrentSeries());
-        //args.put(MySQLiteHelper.COLUMN_SERIES_TOTAL_EPS, series.getTotalSeries());
+        args.put(MySQLiteHelper.COLUMN_SERIES_CURRENT_EPS, series.getCurrentSeries());
+        args.put(MySQLiteHelper.COLUMN_SERIES_TOTAL_EPS, series.getTotalSeries());
         database.update(MySQLiteHelper.TABLE_SERIES, args, MySQLiteHelper.COLUMN_SERIES_ID +
                 "=?", new String[]{
                 Long.toString(series.getId())});
@@ -119,8 +119,8 @@ public class DataSource {
             Series serie = new Series();
             serie.setId(cursor.getLong(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_SERIES_ID)));
             serie.setSeries(cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_SERIES_NAME)));
-            //serie.setCurrentSeries(cursor.getInt(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_SERIES_CURRENT_EPS)));
-            //serie.setTotalSeries(cursor.getInt(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_SERIES_TOTAL_EPS)));
+            serie.setCurrentSeries(cursor.getInt(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_SERIES_CURRENT_EPS)));
+            serie.setTotalSeries(cursor.getInt(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_SERIES_TOTAL_EPS)));
             return serie;
         } catch (CursorIndexOutOfBoundsException exception) {
             exception.printStackTrace();

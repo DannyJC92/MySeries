@@ -32,11 +32,11 @@ public class DetailsActivity extends AppCompatActivity {
         newName = (EditText) findViewById(R.id.update_series);
         newName.setText(series.getSeries().toString());
 
-        //newCurEps = (EditText) findViewById(R.id.update_current_episode);
-        //newCurEps.setText(series.getSeries().toString());
+        newCurEps = (EditText) findViewById(R.id.update_current_episode);
+        newCurEps.setText(Integer.toString(series.getCurrentSeries()));
 
-        //newTotEps = (EditText) findViewById(R.id.update_total_episodes);
-        //newTotEps.setText(series.getSeries().toString());
+        newTotEps = (EditText) findViewById(R.id.update_total_episodes);
+        newTotEps.setText(Integer.toString(series.getTotalSeries()));
 
         Button updateButton = (Button) findViewById(R.id.update_button);
         updateButton.setOnClickListener(new View.OnClickListener(){

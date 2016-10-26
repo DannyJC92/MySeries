@@ -34,13 +34,13 @@ public class AddSeries extends AppCompatActivity {
             public void onClick(View view) {
                 // Check if some data is entered
                 if (!TextUtils.isEmpty(newSeries.getText())
-                        //&& !TextUtils.isEmpty(curEps.getText())
-                        //&& !TextUtils.isEmpty(totEps.getText())
+                        && !TextUtils.isEmpty(curEps.getText())
+                        && !TextUtils.isEmpty(totEps.getText())
                         ) {
 
-                    long seriesId = datasource.createSeries(newSeries.getText().toString()
-                            //, Integer.parseInt(curEps.getText().toString()),
-                            //Integer.parseInt(totEps.getText().toString())
+                    long seriesId = datasource.createSeries(newSeries.getText().toString(),
+                            Integer.parseInt(curEps.getText().toString()),
+                            Integer.parseInt(totEps.getText().toString())
                             );
 
                     Intent resultIntent = new Intent();
