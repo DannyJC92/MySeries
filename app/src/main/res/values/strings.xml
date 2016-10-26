@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MySeries</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_list_empty">There haven\'t been added any series</string>
+    <string name="title_activity_add_series">AddSeries</string>
+    <string name="series_name">Name</string>
+    <string name="series_total_eps">Total episodes</string>
+    <string name="series_current_eps">Current episode</string>
+    <string name="title_activity_details">DetailsActivity</string>
+</resources>
