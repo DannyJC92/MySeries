@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ public class DetailsActivity extends AppCompatActivity {
     private DataSource datasource;
     private Series series;
     private EditText newName, newCurEps, newTotEps;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +30,23 @@ public class DetailsActivity extends AppCompatActivity {
         final long seriesId = getIntent().getLongExtra(MainActivity.EXTRA_SERIES_ID, -1);
         series = datasource.getSerie(seriesId);
 
+        // Showing the series name
         TextView title = (TextView) findViewById(R.id.series_title);
         title.setText(series.getSeries().toString());
 
+        // Editing the series name
         newName = (EditText) findViewById(R.id.update_series);
         newName.setText(series.getSeries().toString());
 
+        // Editing the progress watching the series
         newCurEps = (EditText) findViewById(R.id.update_current_episode);
         newCurEps.setText(Integer.toString(series.getCurrentSeries()));
 
+        // Editing the total of episodes of the series
         newTotEps = (EditText) findViewById(R.id.update_total_episodes);
         newTotEps.setText(Integer.toString(series.getTotalSeries()));
 
-        //TODO: setOnClickListener for +
+        // Add button for adding 1 to current episodes
         Button addButton = (Button) findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @ Override
@@ -48,6 +54,11 @@ public class DetailsActivity extends AppCompatActivity {
                 series.addOne(newCurEps);
             }
         });
+
+        // Set the Progress Bar
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setProgress(series.getCurrentSeries());
+        progressBar.setMax(series.getTotalSeries());
 
         Button updateButton = (Button) findViewById(R.id.update_button);
         updateButton.setOnClickListener(new View.OnClickListener() {

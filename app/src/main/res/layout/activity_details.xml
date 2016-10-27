@@ -90,5 +90,11 @@
         android:textSize="20sp" />
 
     <!-- TODO: Add a progress bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="20sp"
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>
