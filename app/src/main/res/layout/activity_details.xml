@@ -43,8 +43,8 @@
         android:layout_below="@+id/update_series"
         android:layout_marginTop="40dp"
         android:layout_toEndOf="@+id/update_button"
-        android:text="Total episodes"
         android:labelFor="@+id/update_total_episodes"
+        android:text="Total episodes"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -52,8 +52,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView"
-        android:text="Current episode"
         android:labelFor="@+id/update_current_episode"
+        android:text="Current episode"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -65,19 +65,30 @@
         android:layout_below="@+id/textView"
         android:ems="10"
         android:inputType="number"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/update_current_episode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView2"
         android:layout_alignEnd="@+id/textView2"
+        android:layout_alignParentStart="true"
         android:layout_alignStart="@+id/textView2"
+        android:layout_below="@+id/textView2"
         android:ems="10"
         android:inputType="number"
         android:textAlignment="center" />
 
+    <Button
+        android:id="@+id/add_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/update_current_episode"
+        android:layout_toEndOf="@+id/update_current_episode"
+        android:text="+"
+        android:textSize="20sp" />
+
+    <!-- TODO: Add a progress bar -->
 
 </RelativeLayout>

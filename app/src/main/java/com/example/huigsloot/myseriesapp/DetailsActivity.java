@@ -40,14 +40,25 @@ public class DetailsActivity extends AppCompatActivity {
         newTotEps = (EditText) findViewById(R.id.update_total_episodes);
         newTotEps.setText(Integer.toString(series.getTotalSeries()));
 
+        //TODO: setOnClickListener for +
+        Button addButton = (Button) findViewById(R.id.add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @ Override
+            public void onClick(View v){
+                series.addOne(newCurEps);
+            }
+        });
+
         Button updateButton = (Button) findViewById(R.id.update_button);
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if the fields are filled
                 if (!TextUtils.isEmpty(newName.getText())
                         && !TextUtils.isEmpty(newCurEps.getText())
                         && !TextUtils.isEmpty(newTotEps.getText())) {
 
+                    // Return the values from the fields to Strings
                     series.setSeries(newName.getText().toString());
                     series.setCurrentSeries(Integer.parseInt(newCurEps.getText().toString()));
                     series.setTotalSeries(Integer.parseInt(newTotEps.getText().toString()));
@@ -59,6 +70,7 @@ public class DetailsActivity extends AppCompatActivity {
                     setResult(Activity.RESULT_OK, resultIntent);
                     finish();
                 } else {
+                    // In case the fields aren't filled, show a message
                     Toast.makeText(DetailsActivity.this, "Please enter some text in the fields", Toast.LENGTH_LONG).show();
                 }
             }
