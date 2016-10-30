@@ -7,4 +7,8 @@
     <string name="series_total_eps">Total episodes</string>
     <string name="series_current_eps">Current episode</string>
     <string name="title_activity_details">DetailsActivity</string>
+    <string name="curEps_totEps">The current watched episodes can\'t be higher
+        than the total amount of episodes</string>
+    <string name="empty_field">Please enter some text in the fields</string>
+    <string name="series_updated">Series updated</string>
 </resources>

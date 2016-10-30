@@ -19,7 +19,7 @@ public class DetailsActivity extends AppCompatActivity {
     private DataSource datasource;
     private Series series;
     private EditText newName, newCurEps, newTotEps;
-    private ProgressBar progressBar;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,23 +30,27 @@ public class DetailsActivity extends AppCompatActivity {
         final long seriesId = getIntent().getLongExtra(MainActivity.EXTRA_SERIES_ID, -1);
         series = datasource.getSerie(seriesId);
 
+        String name = series.getSeries().toString();
+        String cur = Integer.toString(series.getCurrentSeries());
+        String tot = Integer.toString(series.getTotalSeries());
+
         // Showing the series name
         TextView title = (TextView) findViewById(R.id.series_title);
-        title.setText(series.getSeries().toString());
+        title.setText(name);
 
-        // Editing the series name
+        // Field for editing the series name
         newName = (EditText) findViewById(R.id.update_series);
-        newName.setText(series.getSeries().toString());
+        newName.setText(name);
 
-        // Editing the progress watching the series
+        // Field for editing the progress watching the series
         newCurEps = (EditText) findViewById(R.id.update_current_episode);
-        newCurEps.setText(Integer.toString(series.getCurrentSeries()));
+        newCurEps.setText(cur);
 
-        // Editing the total of episodes of the series
+        // Field for editing the total of episodes of the series
         newTotEps = (EditText) findViewById(R.id.update_total_episodes);
-        newTotEps.setText(Integer.toString(series.getTotalSeries()));
+        newTotEps.setText(tot);
 
-        // Add button for adding 1 to current episodes
+        // Button for adding 1 to current episodes
         Button addButton = (Button) findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @ Override
@@ -69,20 +73,29 @@ public class DetailsActivity extends AppCompatActivity {
                         && !TextUtils.isEmpty(newCurEps.getText())
                         && !TextUtils.isEmpty(newTotEps.getText())) {
 
+                    int cur = Integer.parseInt(newCurEps.getText().toString());
+                    int tot = Integer.parseInt(newTotEps.getText().toString());
+
+                    if (tot >= cur){
+
                     // Return the values from the fields to Strings
                     series.setSeries(newName.getText().toString());
-                    series.setCurrentSeries(Integer.parseInt(newCurEps.getText().toString()));
-                    series.setTotalSeries(Integer.parseInt(newTotEps.getText().toString()));
+                    series.setCurrentSeries(cur);
+                    series.setTotalSeries(tot);
 
                     datasource.updateSeries(series);
-                    Toast.makeText(DetailsActivity.this, "Series updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailsActivity.this, R.string.series_updated, Toast.LENGTH_SHORT).show();
 
                     Intent resultIntent = new Intent();
                     setResult(Activity.RESULT_OK, resultIntent);
                     finish();
+                    } else {
+                        Toast.makeText(DetailsActivity.this, R.string.curEps_totEps, Toast.LENGTH_LONG).show();
+                    }
+
                 } else {
                     // In case the fields aren't filled, show a message
-                    Toast.makeText(DetailsActivity.this, "Please enter some text in the fields", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailsActivity.this, R.string.empty_field, Toast.LENGTH_LONG).show();
                 }
             }
         });

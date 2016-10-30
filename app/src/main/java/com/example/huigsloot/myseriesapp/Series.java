@@ -52,7 +52,6 @@ public class Series {
         return series;
     }
 
-    // TODO: Create method for adding 1 to EditText
     public EditText addOne(EditText et){
         // Get the integer from the EditText
         int i = Integer.parseInt(et.getText().toString());

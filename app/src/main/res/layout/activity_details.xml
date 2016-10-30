@@ -89,7 +89,6 @@
         android:text="+"
         android:textSize="20sp" />
 
-    <!-- TODO: Add a progress bar -->
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
