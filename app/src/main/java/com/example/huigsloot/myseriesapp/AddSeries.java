@@ -28,6 +28,8 @@ public class AddSeries extends AppCompatActivity {
         totEps = (EditText) findViewById(R.id.new_total_episodes);
         datasource = new DataSource(this);
 
+        //TODO Current Season + Total Seasons
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

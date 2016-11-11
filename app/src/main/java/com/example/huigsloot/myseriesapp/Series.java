@@ -52,14 +52,12 @@ public class Series {
         return series;
     }
 
-    public EditText addOne(EditText et){
+    public void addOne(EditText et){
         // Get the integer from the EditText
         int i = Integer.parseInt(et.getText().toString());
 
         // Set the integer back to the EditText
         i++;
         et.setText(Integer.toString(i));
-
-        return et;
     }
 }

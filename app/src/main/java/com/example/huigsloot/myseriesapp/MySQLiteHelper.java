@@ -19,6 +19,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_SERIES_NAME = "series_name";
     public static final String COLUMN_SERIES_CURRENT_EPS = "series_current_eps";
     public static final String COLUMN_SERIES_TOTAL_EPS = "series_total_eps";
+    //TODO Current Season + Total Seasons
 
     // Creating the table
     private static final String DATABASE_CREATE_SERIES =

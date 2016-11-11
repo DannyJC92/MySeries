@@ -24,6 +24,8 @@ public class DataSource {
                     MySQLiteHelper.COLUMN_SERIES_TOTAL_EPS
             };
 
+    //TODO Current Season + Total Seasons
+
     public DataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
         database = dbHelper.getWritableDatabase();
